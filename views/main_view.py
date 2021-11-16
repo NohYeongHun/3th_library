@@ -23,8 +23,10 @@ def register():
         if not user:
 
             password = request.form['password']
+            password2 = request.form['password2'] # 비밀번호 확인
+
             # 패스워드 유효성 검사
-            if register_password_check(password):
+            if register_password_check(password) and password2 == password:
                 
                 # 패스워드 암호화
                 password = generate_password_hash(password)
