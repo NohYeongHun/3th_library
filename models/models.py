@@ -1,4 +1,5 @@
 from app import db
+import datetime
 
 
 class rabbitUser(db.Model):
@@ -6,6 +7,7 @@ class rabbitUser(db.Model):
 
     id = db.Column(db.String(20), primary_key=True, nullable=False )
     pw = db.Column(db.String(255), nullable=False)
+    nickname = db.Column(db.String(200), nullable=False)
     telephone = db.Column(db.String(20))
 
 class rabbitBook(db.Model):
@@ -15,7 +17,7 @@ class rabbitBook(db.Model):
     book_name = db.Column(db.String(256), nullable=False)
     publisher = db.Column(db.String(20), nullable=False)
     author = db.Column(db.String(20), nullable=False)
-    publication_date = db.Column(db)
+    publication_date = db.Column(db.DateTime)
     pages = db.Column(db.Integer, nullable=False)
     isbn = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(2000), nullable=False)
