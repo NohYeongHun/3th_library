@@ -7,7 +7,7 @@ class rabbitUser(db.Model):
 
     id = db.Column(db.String(20), primary_key=True, nullable=False )
     pw = db.Column(db.String(255), nullable=False)
-    nickname = db.Column(db.String(200), nullable=False)
+    user_name = db.Column(db.String(200), nullable=False)
     telephone = db.Column(db.String(20))
 
 class rabbitBook(db.Model):
