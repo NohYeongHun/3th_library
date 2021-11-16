@@ -80,7 +80,7 @@ def login():
             pass
         else:
             flash("아이디를 이메일 형식으로 입력해야 합니다.")
-            return redirect(url_for('main.lgoin'))
+            return redirect(url_for('main.login'))
         
 
         # 패스워드가 형식에 맞는지?
