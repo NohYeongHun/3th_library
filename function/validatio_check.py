@@ -31,3 +31,26 @@ def register_password_check(password):
         return False
 
 
+# 이메일 검증.
+def register_email_check(id):
+
+    pattern = re.compile('^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
+    result = bool(pattern.match(id))
+
+    if result:
+        return True
+    else:
+        return False
+
+# 사용자 이름 검증
+def register_name_check(name):
+
+    pattern = re.compile('^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$')
+    result = bool(pattern.match(name))
+
+    if result:
+        return True
+    else:
+        return False
+
+
