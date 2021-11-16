@@ -1,21 +1,24 @@
+from flask_sqlalchemy import SQLAlchemy
 import pymysql
 from flask import Flask
 from db_connect import db
-from dotenv import load_dotenv
-import os
+from flask_migrate import Migrate
+import config
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
 
-# dotenv 사용
-load_dotenv()
-DB_CONNECT = os.environ.get("DB_CONNECT")
+    app.config.from_object(config) # config에서 가져온 파일 사용하기
+    db.init_app(app) #SQLAlchemy 객체를 app객체와 이어줌.
+    Migrate().init_app(app, db)
 
-# DB 연결
-app.config['SQLALCHEMY_DATABASE_URI'] = DB_CONNECT
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    from views import main_view
+    from models import models
+    app.register_blueprint(main_view.bp)
 
-db.init_app(app)
+    app.secret_key = "secret"
+    app.config['SESSION_TYPE'] = 'filesystem'
 
+    return app
 if __name__ == '__main__':
-    app.run(debug=True)
-# hello
+    create_app().run(debug=True)
