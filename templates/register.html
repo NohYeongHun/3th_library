@@ -1,17 +1,6 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-<script type="text/javascript">
-  function pw_check() {
-
-      // 패스워드 패턴들
-      var pattern1 = /[0-9]/;
-      var pattern2 = /[a-zA-Z]/;
-      var pattern3 = /[~!@\#$%<>^&*]/; 
-
-
-  }
-</script>
 <form action="{{ url_for('main.register') }}" method="post">
   <div class="form-group">
     <label for="user_id">아이디</label>
