@@ -1,5 +1,5 @@
 from app import db
-import datetime
+from datetime import datetime
 
 
 class rabbitUser(db.Model):
@@ -22,3 +22,40 @@ class rabbitBook(db.Model):
     isbn = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(2000), nullable=False)
     link = db.Column(db.String(200), nullable=False)
+
+class rabbitInventory(db.Model):
+    __tablename__ ='inventory'
+
+    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
+    book_id = db.Column(db.Integer, db.ForeignKey('rabbitBook.id'), nullable=False)
+    exist_check = db.Column(db.Boolean, nullable=False, default=True)
+
+
+
+class rabbitRent(db.Model):
+
+    __tablename__ ='rent'
+
+    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
+    book_id = db.Column(db.Integer, db.ForeignKey('rabbitInventory.id'), nullable=False)
+    book_info_id = db.Column(db.Integer, db.ForeignKey('rabbitBook.id'), nullable=False)
+    user_id = db.Column(db.String(20), db.ForeignKey('rabbitUser.id'), nullable=False)
+    # 빌린 날짜
+    rent_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    # 마감 예정일
+    due_date = db.Column(db.DateTime, nullable=False)
+    # 실제 반납일
+    return_date = db.Column(db.DateTime, nullable=False)
+    # 반납 여부
+    book_return = db.Column(db.Boolean, nullable=False, default= False)
+
+class rabbitComment(db.Model):
+
+    __tablename__ = 'comment'
+    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
+    user_id = db.Column(db.String(20), db.ForeignKey('rabbitUser.id'), nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey('rabbitBook.id'),nullable=False)
+    comment = db.Column(db.String(255))
+    rating = db.Column(db.Integer)
+
+    
