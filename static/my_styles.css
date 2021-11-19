@@ -1,0 +1,25 @@
+.card-img-top {
+    height: 30vw;
+    object-fit: contain;
+} 
+.card-header {
+    height: 30vw;
+    object-fit: contain;
+}
+
+.card-body {
+    height: 5vw;
+    object-fit: contain;
+}
+
+.card-footer{
+    height: 5vw;
+    object-fit: contain;
+}
+
+.checked {
+    color: orange;
+  }
+
+
+/* raitng bar*/

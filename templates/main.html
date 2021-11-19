@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}메인 페이지{% endblock %}
+
+{% block page_content %}
+    <!-- 이전 페이지-->
+    
+    {% if page_list %}
+        <div class="container">
+            <div class="row">
+            {% for page in page_list.items%}
+            <div class="col-sm-3 mb-4" >
+                <div class="card">
+                    <div class="card book-card h-100">
+                        <div class="card-header">
+                            <img src="/static/img/{{page.id}}.jpg"  class="card-img-top" />
+                        </div>
+                        
+                        <div class="card-body">
+                            <h6 class="card-title">{{page.book_name}}</h6>
+                        </div>
+                        <div class="card-footer">                            
+
+                            <button class="btn btn-sm btn-success">대여하기</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <p>책이 없어요...</p>
+    {% endif %}
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if page_list.has_prev %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_list.prev_num }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        {% for page_num in page_list.iter_pages() %}
+            {% if page_num %}
+                {% if page_num != page_list.page %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                </li>
+                {% else %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">{{ page_num }}</a>
+                </li>
+                {% endif %}
+           {% else %}
+                <li class="disabled">
+                    <a class="page-link" href="#">...</a>
+                </li>
+           {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if page_list.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_list.next_num }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+
+{% endblock %}
+
+
+
+
+<script>
+var $star_rating = $('.star-rating .fa');
+
+var SetRatingStar = function() {
+  return $star_rating.each(function() {
+    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+      return $(this).removeClass('fa-star-o').addClass('fa-star');
+    } else {
+      return $(this).removeClass('fa-star').addClass('fa-star-o');
+    }
+  });
+};
+
+$star_rating.on('click', function() {
+  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+  return SetRatingStar();
+});
+
+SetRatingStar();
+$(document).ready(function() {
+
+});
+</script>

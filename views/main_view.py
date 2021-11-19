@@ -9,7 +9,11 @@ bp = Blueprint('main', __name__, url_prefix='/')
     
 @bp.route('/')
 def home():
-    return render_template('login.html')
+    book_list = rabbitBook.query.order_by(rabbitBook.id.asc())
+
+    page = request.args.get('page', type=int, default=1) # 페이지
+    page_list = book_list.paginate(page, per_page = 8)
+    return render_template('main.html', page_list = page_list)
 
 @bp.route('/register', methods=('GET','POST'))
 def register():
