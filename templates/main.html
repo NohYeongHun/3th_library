@@ -8,19 +8,27 @@
     {% if page_list %}
         <div class="container">
             <div class="row">
-            {% for page in page_list.items%}
+            {% for book in page_list.items%}
             <div class="col-sm-3 mb-4" >
                 <div class="card">
                     <div class="card book-card h-100">
                         <div class="card-header">
-                            <img src="/static/img/{{page.id}}.jpg"  class="card-img-top" />
-                        </div>
-                        
+                            <img src="/static/img/{{book.id}}.jpg"  class="card-img-top" />
+                        </div>                        
                         <div class="card-body">
-                            <h6 class="card-title">{{page.book_name}}</h6>
+                            <a class="card-title" href="{{url_for('comment.home', id=book.id)}}">
+                                <h6>
+                                    {{book.book_name}}
+                                </h6>
+                            </a>
                         </div>
-                        <div class="card-footer">                            
-
+                        <div class="card-footer" style="text-align:center;">
+                            <div>
+                                <!-- star rating bar 레이아웃만 구현 => 로직은 미구현 -->
+                                {% for x in range(book.id) %}
+                                    <span class="fa fa-star checked"></span>
+                                {% endfor %}
+                            </div>
                             <button class="btn btn-sm btn-success">대여하기</button>
                         </div>
                         
@@ -74,30 +82,3 @@
     </ul>
 
 {% endblock %}
-
-
-
-
-<script>
-var $star_rating = $('.star-rating .fa');
-
-var SetRatingStar = function() {
-  return $star_rating.each(function() {
-    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-      return $(this).removeClass('fa-star-o').addClass('fa-star');
-    } else {
-      return $(this).removeClass('fa-star').addClass('fa-star-o');
-    }
-  });
-};
-
-$star_rating.on('click', function() {
-  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
-  return SetRatingStar();
-});
-
-SetRatingStar();
-$(document).ready(function() {
-
-});
-</script>
