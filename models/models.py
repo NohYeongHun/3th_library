@@ -45,7 +45,7 @@ class rabbitRent(db.Model):
     # 마감 예정일
     due_date = db.Column(db.DateTime, nullable=False)
     # 실제 반납일
-    return_date = db.Column(db.DateTime, nullable=False)
+    return_date = db.Column(db.DateTime, nullable=True)
     # 반납 여부
     book_return = db.Column(db.Boolean, nullable=False, default= False)
 
