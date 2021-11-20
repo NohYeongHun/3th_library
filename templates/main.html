@@ -24,9 +24,13 @@
                         <div class="card-footer overflow-hidden" style="text-align:center;">
                             <div>
                                 <!-- star rating bar 레이아웃만 구현 => 로직은 미구현 -->
-                                {% for x in range(book.id) %}
+                                {% for x in range(rating_list[book.id]) %}
                                     <span class="fa fa-star checked"></span>
                                 {% endfor %}
+                                {% for x in range(5-rating_list[book.id]) %}
+                                    <label class="fa fa-star unchecked"></label>
+                                {% endfor %}
+
                             </div>
                             <button class="btn btn-sm btn-success">대여하기</button>
                         </div>
@@ -40,6 +44,7 @@
     {% else %}
     <p>책이 없어요...</p>
     {% endif %}
+    
     <ul class="pagination justify-content-center">
         <!-- 이전페이지 -->
         {% if page_list.has_prev %}

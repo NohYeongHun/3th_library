@@ -62,6 +62,11 @@ a{
     object-fit: fill;
 }
 
+.unchecked{
+  color: gray;
+  object-fit: fill;
+}
+
 /* star */
   .star-widget label{
     font-size: 40px;

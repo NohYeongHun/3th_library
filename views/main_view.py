@@ -3,19 +3,34 @@ from flask import Blueprint, render_template, request, url_for, session, redirec
 from models.models import *
 from werkzeug.security import generate_password_hash, check_password_hash
 from function.validation_check import *
+from function.calc import avg_calc
 
 bp = Blueprint('main', __name__, url_prefix='/')
-    
+
+   
     
 @bp.route('/')
 def home():
     book_list = rabbitBook.query.order_by(rabbitBook.id.asc())
 
+    # dictionary
+    rating_list ={}
+
+    # rating 계산
+    for book in book_list:
+        try:
+            ratings = rabbitComment.query.filter(rabbitComment.book_id == book.id).with_entities(rabbitComment.rating).all()
+            avg = avg_calc(ratings)
+            rating_list[book.id] = avg
+             
+        except:
+            rating_list[book.id] = 0
+
     page = request.args.get('page', type=int, default=1) # 페이지
     page_list = book_list.paginate(page, per_page = 8)
 
 
-    return render_template('main.html', page_list = page_list)
+    return render_template('main.html', page_list = page_list, rating_list = rating_list)
 
 @bp.route('/register', methods=('GET','POST'))
 def register():
