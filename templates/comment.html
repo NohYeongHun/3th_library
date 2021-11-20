@@ -80,14 +80,17 @@
                     <div class="col-sm-1"></div>
                     <div class="col-sm-10 mb-4 mt-4">
                         <div class="card book-card h-100">
-                            <div class="card-body">
-                                <h5>{{user_name[i]}}</h5>
+                            <div class="card-body overflow-hidden">
+                                <h5 class="card-title">
+                                    {{user_name[i]}}
+                                    {% for x in range(comments[i].rating) %}
+                                    <span class="fa fa-star checked"></span>
+                                    {% endfor %}
+                                </h5>
+                                
                             </div>
-                            <div class="card-header">
+                            <div class="card-footer overflow-hidden">
                                 <p>{{comments[i].comment}}</p>
-                                {% for x in range(comments[i].rating) %}
-                                <span class="fa fa-star checked"></span>
-                                {% endfor %}
                             </div>
                         </div>
                     </div>

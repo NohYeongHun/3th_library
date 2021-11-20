@@ -25,7 +25,8 @@
 }
 
 .card-title{
-    object-fit: contain;
+    height: 3vw;
+    object-fit: fill;
 }
 
 /* table index*/
