@@ -2,7 +2,7 @@ from operator import ge
 from flask import Blueprint, render_template, request, url_for, session, redirect, flash
 from models.models import *
 from werkzeug.security import generate_password_hash, check_password_hash
-from function.validatio_check import *
+from function.validation_check import *
 
 bp = Blueprint('main', __name__, url_prefix='/')
     
@@ -13,6 +13,8 @@ def home():
 
     page = request.args.get('page', type=int, default=1) # 페이지
     page_list = book_list.paginate(page, per_page = 8)
+
+
     return render_template('main.html', page_list = page_list)
 
 @bp.route('/register', methods=('GET','POST'))
@@ -108,7 +110,7 @@ def login():
         else:
             session.clear()
             session['user_id'] = id
-            session['name'] = user_data.user_name
+            session['user_name'] = user_data.user_name
 
             flash("로그인 성공")
             return redirect(url_for('main.home'))
