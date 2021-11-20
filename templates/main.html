@@ -32,7 +32,21 @@
                                 {% endfor %}
 
                             </div>
-                            <button class="btn btn-sm btn-success">대여하기</button>
+
+                            <!-- 버튼 페이지 이동 기능-->
+                            <script type="text/javascript">
+                                function rent_button(){
+                                    window.location.href = "{{url_for('rent.home', id=book.id) }}";
+                                }
+                            </script>
+                            <button
+                                class="btn btn-sm btn-success" 
+                                type="button"
+                                onclick="rent_button();"
+                            >
+                                대여하기
+                            </button>
+
                         </div>
                         
                     </div>
@@ -86,3 +100,4 @@
     </ul>
 
 {% endblock %}
+                            
