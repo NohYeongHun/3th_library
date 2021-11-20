@@ -33,15 +33,6 @@
     - id 값에 맞는 정보 출력 구현
     - 댓글 목록 보여주기 구현<br/>
 
-- [ ] Mercury
-- [x] Venus
-- [x] Earth (Orbit/Moon)
-- [x] Mars
-- [ ] Jupiter
-- [ ] Saturn
-- [ ] Uranus
-- [ ] Neptune
-- [ ] Comet Haley
 
 ### ToDo-List
 | 항목                    |내용                                | 진행 여부                                                               |
