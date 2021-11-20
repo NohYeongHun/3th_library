@@ -3,10 +3,10 @@ CREATE TABLE `rent` (
   `book_id` int NOT NULL,
   `book_info_id` int NOT NULL,
   `user_id` varchar(20) NOT NULL,
-  `rent_date` datetime NOT NULL ,
-  `due_date` datetime NOT NULL ,
-  `return_date` datetime NOT NULL ,
-  `book_return` boolean NOT NULL 
+  `rent_date` date  NOT NULL DEFAULT(CURRENT_DATE),
+  `due_date` date NOT NULL DEFAULT(CURRENT_DATE+7),
+  `return_date` datetime,
+  `book_return` boolean NOT NULL DEFAULT FALSE
 );
 
 ALTER TABLE `rent` ADD FOREIGN KEY (`book_id`) REFERENCES `inventory` (`id`);
