@@ -3,7 +3,7 @@ create table book(
     book_name varchar(256) NOT NULL,
     publisher varchar(20) NOT NULL,
     author varchar(20) NOT NULL,
-    publication_date DATETIME,
+    publication_date DATE,
     pages INT NOT NULL,
     isbn long NOT NULL,
     description varchar(2000) NOT NULL,
