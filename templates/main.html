@@ -12,17 +12,16 @@
             <div class="col-sm-3 mb-4" >
                 <div class="card">
                     <div class="card book-card h-100">
-                        <div class="card-header">
+                        <div class="card-header overflow-hidden">
                             <img src="/static/img/{{book.id}}.jpg"  class="card-img-top" />
                         </div>                        
-                        <div class="card-body">
-                            <a class="card-title" href="{{url_for('comment.home', id=book.id)}}">
-                                <h6>
-                                    {{book.book_name}}
-                                </h6>
+                        <div class="card-body overflow-hidden">
+                            <!-- 제목 클릭시 해당 제목의 id값 comment.html로 전달.-->
+                            <a class="card-title"  href="{{url_for('comment.home', id=book.id)}}">
+                                <p>{{book.book_name}}</p>
                             </a>
                         </div>
-                        <div class="card-footer" style="text-align:center;">
+                        <div class="card-footer overflow-hidden" style="text-align:center;">
                             <div>
                                 <!-- star rating bar 레이아웃만 구현 => 로직은 미구현 -->
                                 {% for x in range(book.id) %}

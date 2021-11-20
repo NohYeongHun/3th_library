@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}메인 페이지{% endblock %}
+
+
+{% block page_content %}
+    {% if book_info %}
+        <!-- 
+            mb, mt : 하단,상단 여백
+            sm : col 열 여백
+        -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4 mb-4 mt-4">
+                    <div class="card">
+                    <div class="card book-card mx-2 mb-2 mt-2">
+                        <img src="/static/img/{{book_info.id}}.jpg"  class="card-img-contain" />                   
+                    </div>
+                    </div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5 mb-4 mt-4" >
+                    <div class="card h-100">
+                        <table class="card-body h-100">
+                            <tr class="trindex">
+                                <td class="left-index">책이름</td>
+                                <td class="middle-line"/> 
+                                <td class="right-index">{{book_info.book_name}}</td>
+                            </tr>
+                            <tr class="trindex">
+                                <td class="left-index">출판사</td>
+                                <td class="middle-line"/>
+                                <td class="right-index">{{book_info.publisher}}</td>
+                            </tr>
+                            <tr class="trindex">
+                                <td class="left-index">저자</td>
+                                <td class="middle-line"/>
+                                <td class="right-index">{{book_info.author}}</td>
+                            </tr>
+                            <tr class="trindex">
+                                <td class="left-index">출간일</td>
+                                <td class="middle-line"/>
+                                <td class="right-index">{{book_info.publication_date}}</td>
+                            </tr>
+                            <tr class="trindex">
+                                <td class="left-index">페이지수</td>
+                                <td class="middle-line"/>
+                                <td class="right-index">{{book_info.pages}}</td>
+                            </tr>
+                            <tr class="trindex">
+                                <td class="left-index">isbn코드</td>
+                                <td class="middle-line"/>
+                                <td class="right-index">{{book_info.isbn}}</td>
+                            </tr>
+                        </table>      
+                    </div>                       
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+        </div>
+
+        <div class="container">
+        <div class="card">
+            <div class="row">
+                <div class="col-sm-1"></div>
+                
+                <div class="col-sm-10 mb-4 mt-4">
+                    <h5>책 소개</h5>
+                    <br/>
+                        <h4>{{ book_info.description }}</h4>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            <hr>
+
+            {% if comments %}
+                {% for comment in comments%}
+                <div class="row">
+                    <div class="col-sm-1"> {{comment.user_id}}</div>
+                    <div class="col-sm-10 mb-4 mt-4">
+                        <div class="card book-card h-100">
+
+                        <br/>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-1"></div>
+                    
+                </div>
+                {% endfor %}
+            {% else %}
+            <div class="row">
+                <p> 평가 목록이 없네요..</p>
+            </div>
+            {% endif %}
+           
+
+            {% if session['user_id'] %}
+            <div class="row">
+                
+                <div class="wrap">
+                    <div class="card">
+                        
+                        <!-- 댓글창 전송 -->
+                        <form action= "{{url_for('comment.submit', id=book_info.id)}}" method="post">
+
+                            <div class="card-body mb-4">
+                                <div class="star-widget">
+                                    <input type="radio" name="rate" id="rate-5" value="5">
+                                    <label for="rate-5" class="fas fa-star"></label>
+                                    <input type="radio" name="rate" id="rate-4" value="4">
+                                    <label for="rate-4" class="fas fa-star"></label>
+                                    <input type="radio" name="rate" id="rate-3" value="3">
+                                    <label for="rate-3" class="fas fa-star"></label>
+                                    <input type="radio" name="rate" id="rate-2" value="2">
+                                    <label for="rate-2" class="fas fa-star"></label>
+                                    <input type="radio" name="rate" id="rate-1" value="1">
+                                    <label for="rate-1" class="fas fa-star"></label>
+                                </div>
+                                <h5>평가 작성</h5>
+                            </div>
+                            
+                            <div class="card-header mt-4 overflow-hidden">
+                                <div class="mb-3">
+                                    <label class="form-label">댓글</label>
+                                    <textarea id='comment' name='comment' class="form-control" rows="2"></textarea>
+                                </div>
+                                <input class="btn btn-primary" type="submit">
+                            </div>
+
+                        </form>
+
+                    </div>
+
+            </div>
+            {% else %}
+    
+            {% endif %}
+        </div>
+
+
+
+    {% else %}
+        <p>선택한 책의 정보가 없네요..</p>
+    {% endif %}
+
+{% endblock %}
+
