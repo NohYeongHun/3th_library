@@ -11,26 +11,37 @@ bp = Blueprint('main', __name__, url_prefix='/')
     
 @bp.route('/')
 def home():
+
+   
     book_list = rabbitBook.query.order_by(rabbitBook.id.asc())
 
-    # dictionary
-    rating_list ={}
+    # dictionary 
+    rating_list ={} # 레이팅 점수
+    inventory_list={} # 재고 
 
-    # rating 계산
+     # rating 계산
     for book in book_list:
         try:
+            # rating 계산
             ratings = rabbitComment.query.filter(rabbitComment.book_id == book.id).with_entities(rabbitComment.rating).all()
             avg = avg_calc(ratings)
             rating_list[book.id] = avg
-             
+            
         except:
             rating_list[book.id] = 0
+        
 
     page = request.args.get('page', type=int, default=1) # 페이지
     page_list = book_list.paginate(page, per_page = 8)
 
 
-    return render_template('main.html', page_list = page_list, rating_list = rating_list)
+    for book in book_list:
+        # 재고 계산 exist_check == True인 책들의 재고를 계산한다.
+        inventory = rabbitInventory.query.filter((rabbitInventory.book_id == book.id) & (rabbitInventory.exist_check==True)).all()
+        inventory_list[book.id] = len(inventory)
+        
+
+    return render_template('main.html', page_list = page_list, rating_list = rating_list, inventory_list = inventory_list)
 
 @bp.route('/register', methods=('GET','POST'))
 def register():
@@ -135,3 +146,41 @@ def logout():
     session.clear()
     return redirect(url_for('main.home'))
 
+
+@bp.route('/book_rent/<int:book_id>',methods=["POST"] )
+def book_rent(book_id):
+
+    # 만약 사용자가 이미 빌린책이라면? => 대여 불가
+    check_rent = rabbitRent.query.filter(
+            (rabbitRent.book_info_id == book_id) & (rabbitRent.user_id == session['user_id'])
+        ).first()
+
+    if check_rent != None:
+        flash("이미 해당 책을 대여하셨습니다.")
+        return redirect(url_for('main.home'))
+    else:
+    
+    # 대여하기 => 해당 id의 재고 감소
+    # 재고가 없는 상황도 있음.
+        try:
+            # 대여하기를 누른 책의 id의 exist_check를 False로 변경해줌
+            inventory = rabbitInventory.query.filter((rabbitInventory.book_id == book_id) & (rabbitInventory.exist_check==True)).first()
+            inventory.query.filter(rabbitInventory.id == inventory.id).update({"exist_check":(False)})
+
+            # 대여 정보 추가.
+            rent = rabbitRent(
+                book_id = inventory.id, 
+                book_info_id = book_id, 
+                user_id = session['user_id']
+                )
+            db.session.add(rent)
+            db.session.commit()        
+            
+            flash("책이 정상적으로 대여되었습니다.")
+        except:
+            flash("해당 책은 재고가 없습니다.")
+            
+    
+    
+    
+    return redirect(url_for('main.home'))

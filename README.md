@@ -37,7 +37,7 @@
 ### ToDo-List
 | 항목                    |내용                                | 진행 여부                                                               |
 |:-----------------------:|:----------------------------------:|:-----------------------------------------------------------------------:|
-|대여하기                 | DB 로직 구현                       | <ul><li> - [ ] DB로직 구현</li>                                    </ul>|
+|대여하기                 | DB 로직 구현                       | <ul><li> - [x] DB로직 구현</li>                                    </ul>|
 |반납하기                 | 페이지 레이아웃 구현, DB 로직 구현 | <ul><li> - [ ] DB로직 구현</li><li> - [ ] 페이지 레이아웃 구현</li></ul>|
 |대여기록                 | 페이지 레이아웃 구현, DB 로직 구현 | <ul><li> - [ ] DB로직 구현</li><li> - [ ] 페이지 레이아웃 구현</li></ul>|
 |코드 정리                | 코드 정리하기(후 순위)             | <ul><li> - [ ]  ??</li><li> - [ ] ?? </li></ul>                         |
@@ -52,3 +52,5 @@
 | 점수 아이콘 css         |https://www.codingnepalweb.com/star-rating-html-css-javascript/                                        |
 | button href 사용 예시   |https://www.codestudyblog.com/sf2002e/0224200636.html                                                  |
 | 패스워드 정규식         |https://www.ocpsoft.org/tutorials/regular-expressions/password-regular-expression/                     |
+| MySQL 트리거            |https://stackoverflow.com/questions/9190758/mysql-default-date-14-days-for-a-column                    |
+| SQLAlchemy Join문 예시  |https://stackoverflow.com/questions/27900018/flask-sqlalchemy-query-join-relational-tables             |
