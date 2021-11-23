@@ -32,21 +32,17 @@
                                 {% endfor %}
 
                             </div>
+                            <div class="card mx-auto mb-2 card-inventory">재고 : {{inventory_list[book.id]}}</div>
 
-                            <!-- 버튼 페이지 이동 기능-->
-                            <script type="text/javascript">
-                                function rent_button(){
-                                    window.location.href = "{{url_for('rent.home', id=book.id) }}";
-                                }
-                            </script>
+                            <!-- 대여하기 -->
+                            <form action= "{{url_for('main.book_rent', book_id = book.id)}}" method="post">
                             <button
                                 class="btn btn-sm btn-success" 
-                                type="button"
-                                onclick="rent_button();"
+                                type="submit"
                             >
                                 대여하기
                             </button>
-
+                            </form>
                         </div>
                         
                     </div>
