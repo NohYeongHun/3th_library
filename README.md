@@ -51,3 +51,4 @@
 |플라스크와html간 변수전달|https://velog.io/@dltpal07/flask%EC%99%80-html-%EA%B0%84%EC%9D%98-%EB%B3%80%EC%88%98-%EC%A0%84%EB%8B%AC|
 | 점수 아이콘 css         |https://www.codingnepalweb.com/star-rating-html-css-javascript/                                        |
 | button href 사용 예시   |https://www.codestudyblog.com/sf2002e/0224200636.html                                                  |
+| 패스워드 정규식         |https://www.ocpsoft.org/tutorials/regular-expressions/password-regular-expression/                     |
