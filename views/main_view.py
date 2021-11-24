@@ -16,8 +16,9 @@ def home():
     book_list = rabbitBook.query.order_by(rabbitBook.id.asc())
 
     # dictionary 
-    rating_list ={} # 레이팅 점수
     inventory_list={} # 재고 
+    rating_list ={} # 레이팅 점수
+    
 
      # rating 계산
     for book in book_list:
@@ -29,11 +30,10 @@ def home():
             
         except:
             rating_list[book.id] = 0
-        
 
     page = request.args.get('page', type=int, default=1) # 페이지
     page_list = book_list.paginate(page, per_page = 8)
-
+    
 
     for book in book_list:
         # 재고 계산 exist_check == True인 책들의 재고를 계산한다.

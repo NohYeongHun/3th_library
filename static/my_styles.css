@@ -9,6 +9,10 @@
 }
 
 /* card-set*/
+.card-inventory{
+  object-fit: fill;
+  width: 25%;
+}
 .card-header {
     height: 16vw;
     object-fit: fill;
@@ -20,7 +24,7 @@
 }
 
 .card-footer{
-    height: 5vw;
+    height: 6vw;
     object-fit: fill;
 }
 
