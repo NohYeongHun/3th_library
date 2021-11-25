@@ -29,7 +29,12 @@
                         {% endfor %}
                     </div>
                     <div>
-                        <p>{{ rent.rent_date }} ~ {{ rent.due_date }}</p>
+                        <p>대여일자 : {{ rent.rent_date }} ~ {{ rent.due_date }}</p>
+                        {% if rent.return_date %}
+                        <p>반납일자 : {{ rent.return_date}}</p>
+                        {% else %}
+                        <p> 대여중 </p>
+                        {% endif %}
                     </div>
 
                 </div>

@@ -152,7 +152,7 @@ def book_rent(book_id):
 
     # 만약 사용자가 이미 빌린책이라면? => 대여 불가
     check_rent = rabbitRent.query.filter(
-            (rabbitRent.book_info_id == book_id) & (rabbitRent.user_id == session['user_id'])
+            (rabbitRent.book_info_id == book_id) & (rabbitRent.user_id == session['user_id']) & (rabbitRent.book_return == False)
         ).first()
 
     if check_rent != None:

@@ -63,7 +63,7 @@ def book_record(user_id):
     rent_list = rabbitRent.query\
         .join(rabbitBook, rabbitRent.book_info_id == rabbitBook.id)\
         .add_columns(
-            rabbitRent.rent_date, rabbitRent.due_date, rabbitRent.book_return, rabbitRent.book_id,
+            rabbitRent.rent_date, rabbitRent.due_date, rabbitRent.book_return, rabbitRent.book_id, rabbitRent.return_date,
             rabbitBook.book_name, rabbitBook.id
         ).filter(rabbitRent.user_id == user_id)
 
