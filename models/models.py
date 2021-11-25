@@ -19,7 +19,7 @@ class rabbitBook(db.Model):
     author = db.Column(db.String(20), nullable=False)
     publication_date = db.Column(db.DateTime)
     pages = db.Column(db.Integer, nullable=False)
-    isbn = db.Column(db.Integer, nullable=False)
+    isbn = db.Column(db.BigInteger, nullable=False)
     description = db.Column(db.String(2000), nullable=False)
     link = db.Column(db.String(200), nullable=False)
 
