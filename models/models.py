@@ -28,7 +28,7 @@ class rabbitInventory(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
-    exist_check = db.Column(db.Boolean, nullable=False, default=True)
+    exist_check = db.Column(db.Boolean, default=True, server_default= db.text('True'),nullable=False)
 
 
 
@@ -41,7 +41,7 @@ class rabbitRent(db.Model):
     book_info_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
     user_id = db.Column(db.String(20), db.ForeignKey('user.id'), nullable=False)
     # 빌린 날짜
-    rent_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    rent_date = db.Column(db.DateTime, nullable=False)
     # 마감 예정일
     due_date = db.Column(db.DateTime, nullable=False)
     # 실제 반납일
