@@ -57,6 +57,30 @@ def book_return(book_id):
 
 @bp.route('/rent_record/<string:user_id>')
 def book_record(user_id):
-    rent_record_list = rabbitRent.query.filter(rabbitRent.user_id == user_id).all()
-    
-    return render_template('rent_record.html',rent_record_list = rent_record_list)
+    '''
+    대여 기록에 대한 코드.
+    '''
+    rent_list = rabbitRent.query\
+        .join(rabbitBook, rabbitRent.book_info_id == rabbitBook.id)\
+        .add_columns(
+            rabbitRent.rent_date, rabbitRent.due_date, rabbitRent.book_return, rabbitRent.book_id,
+            rabbitBook.book_name, rabbitBook.id
+        ).filter(rabbitRent.user_id == user_id)
+
+    book_list = rabbitBook.query.order_by(rabbitBook.id.asc())
+    rating_list = {} # 레이팅 점수
+    for book in book_list:
+        
+        try:
+            # rating 계산 
+            ratings = rabbitComment.query.filter(rabbitComment.book_id == book.id).with_entities(rabbitComment.rating).all()
+            avg = avg_calc(ratings)
+            rating_list[book.id]= avg
+            
+        except:
+            rating_list[book.id] = 0
+
+    page = request.args.get('page', type=int, default=1) # 페이지
+    page_list = rent_list.paginate(page, per_page = 8)
+
+    return render_template('rent_record.html', page_list = page_list, rating_list = rating_list)
