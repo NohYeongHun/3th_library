@@ -30,15 +30,11 @@ PW='<PW>'
 & flask db migrate
 & flask db upgrade
 
-6. 트리거만 추가.(.venv 진입상태)
-- 대여 시 자동으로 현재날짜와 반납일자를 데이터베이스에 넣어줍니다.
-$ mysql -u<ID> -p<PW> <데이터베이스명> < sql/rent_trigger.sql
-
-7. 테스트 데이터 넣어주기
+6. 테스트 데이터 넣어주기
 $ insert/csv_insert.py 실행
 $ insert/inventory_insert.py 실행
 
-8. Flask run 설정
+7. Flask run 설정
 $ export FLASK_APP=app.py
 $ flask run
 
