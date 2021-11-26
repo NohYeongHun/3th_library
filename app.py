@@ -2,27 +2,16 @@ from flask import Flask
 from db_connect import db
 from flask_migrate import Migrate
 from config import config
-from function.trigger import *
 
-def after_create(target, connection, **kw):
-    connection.execute(db.text("""\
-        CREATE TRIGGER test_trigger BEFORE INSERT ON `rent` 
-        FOR EACH ROW SET
-        NEW.rent_date = IFNULL(NEW.rent_date, NOW()),
-        NEW.due_date = TIMESTAMPADD(DAY, 14, NEW.rent_date);
-        """
-    ))
 
 def create_app():
+
     app = Flask(__name__)
 
     app.config.from_object(config) # config에서 가져온 파일 사용하기
     db.init_app(app) #SQLAlchemy 객체를 app객체와 이어줌.
-    db.event.listen(rabbitRent.__table__, "after_create",after_create)
     migrate = Migrate()
     migrate.init_app(app, db)
-
-    # rabbitRent_trigger생성
     
 
     from views import main_view, rent_view, comment_view
