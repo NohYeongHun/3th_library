@@ -1,0 +1,131 @@
+/* container */
+.container{
+  max-width:1200px;
+}
+
+/* card-image*/
+.card-img-top {
+    object-fit: contain;
+} 
+
+/* card-set*/
+.card-inventory{
+  object-fit: fill;
+  width: 25%;
+}
+.card-header {
+    height: 16vw;
+    object-fit: fill;
+}
+
+.card-body {
+    height: 4vw;
+    object-fit: fill;
+}
+
+.card-footer{
+    height: 6vw;
+    object-fit: fill;
+}
+
+.card-title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:100%;
+    font-size:1.15em;
+    font-weight: 600;
+    height: 30px;
+}
+.card-link{
+color: var(--default-typo-black);
+}
+
+/* table index*/
+.trindex{
+    vertical-align:center;
+}
+
+.left-index{
+    padding:2% 4% 2% 5%;
+    width:25%; 
+    text-align:justify
+}
+
+.middle-line{
+    padding:2% 4% 2% 2%;
+    border: 1px
+    solid gray; 
+}
+
+.right-index{
+    padding: 2% 2% 2% 4%;
+    width:75%; 
+    text-align:justify
+}
+
+/* a tag */
+a{
+    color:black;
+    text-decoration: none;
+}
+
+/* star raitng bar*/
+.checked {
+    color: orange;
+    object-fit: fill;
+}
+
+.unchecked{
+  color: gray;
+  object-fit: fill;
+}
+
+/* star */
+  .star-widget label{
+    font-size: 40px;
+    color: #444;
+    padding: 10px;
+    float: right;
+    transition: all 0.2s ease;
+  }
+  input:not(:checked) ~ label:hover,
+  input:not(:checked) ~ label:hover ~ label{
+    color: #fd4;
+  }
+  input:checked ~ label{
+    color: #fd4;
+  }
+  input#rate-5:checked ~ label{
+    color: #fe7;
+    text-shadow: 0 0 20px #952;
+  }
+  #rate-1:checked ~ form header:before{
+    content: "I just hate it ";
+  }
+  #rate-2:checked ~ form header:before{
+    content: "I don't like it ";
+  }
+  #rate-3:checked ~ form header:before{
+    content: "It is awesome ";
+  }
+  #rate-4:checked ~ form header:before{
+    content: "I just like it ";
+  }
+  #rate-5:checked ~ form header:before{
+    content: "I just love it ";
+  }
+  input:checked ~ form{
+    display: block;
+  }
+  .container .star-widget input{
+    display: none;
+  }
+  
+  
+
+.text-muted{
+  overflow : hidden ; 
+  white-space : nowrap ; 
+  text-overflow : ellipsis;
+}
