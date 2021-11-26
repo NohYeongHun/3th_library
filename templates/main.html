@@ -34,6 +34,7 @@
                                 {% endfor %}
                                 <small class="text-muted">{{inventory_list[book.id]}}/3권</small>
                             </div>
+                            {% if session['user_id'] %}
                             <!-- 대여하기 -->
                             <div class="col me-auto text-end">
                             <form action= "{{url_for('main.book_rent', book_id = book.id)}}" method="post">
@@ -45,6 +46,8 @@
                                     </button>
                                 </form>    
                             </div>
+                            {% else %}
+                            {% endif %}
                         </div>
                             
                             
