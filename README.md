@@ -112,7 +112,7 @@ PW=<PW>
 - netstat -tnl 명령어를 통해 접근 가능한 포트의 설정여부 확인
 - 열려있는 포트를 확인하고 해당 포트로 scp 명령어를 통한 파일전송
 
-$ scp -p<열려있는 포트번호> .env <ID>@<도메인주소>:<저장할 디렉토리경로>
+$ scp -p<열려있는 포트번호> <파일경로> <ID>@<도메인주소>:<저장할 디렉토리경로>
 $ scp -p 3306 ./elice_backend/.env <ID>@<도메인주소>:test/elice_backend
 
 6. flask db Migrate(.venv 진입상태)
