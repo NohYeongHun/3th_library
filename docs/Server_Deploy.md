@@ -45,12 +45,7 @@ $ scp -p 3306 ./elice_backend/.env <ID>@<도메인주소>:test/elice_backend
 & flask db migrate
 & flask db upgrade
 
-
-7. 트리거만 추가.(.venv 진입상태)
-- 대여 시 자동으로 현재날짜와 반납일자를 데이터베이스에 넣어줍니다.
-$ mysql -u<ID> -p<PW> <데이터베이스명> < sql/rent_trigger.sql
-
-8. wsgi.py 생성 및 연결확인
+7. wsgi.py 생성 및 연결확인
         ==python==
 from app import create_app
 
@@ -61,7 +56,7 @@ if __name__ =="__main__":
 - 연결 확인
 uwsgi -–socket 0.0.0.0:5000 --protocol=http –w wsgi:app
 
-9. ini 파일 설정. 
+8. ini 파일 설정. 
 vim test.ini
 [uwsgi]
 module = wsgi:app
@@ -75,7 +70,7 @@ vacuum = true
 
 die-on-term = true
 
-10. uwsgi를 systemctl로 올리기
+9. uwsgi를 systemctl로 올리기
 $ sudo vim /etc/systemd/system/test.service
 [Unit]
 Description=uWSGI instance to serve test
@@ -95,7 +90,7 @@ sudo systemctl start test
 sudo systemctl enable test
 sudo systemctl status test
 
-11. Nginx 설치
+10. Nginx 설치
 $ sudo apt-get install nginx
 $ sudo vim /etc/nginx/sites-available/default
 
@@ -108,7 +103,7 @@ location / {
         uwsgi_pass unix:/home/<ID명>/test/test.sock;
 }
 
-12. Nginx 설정
+11. Nginx 설정
 - nginx 설정 확인
 $ sudo nginx -t
 
@@ -116,7 +111,7 @@ $ sudo nginx -t
 $ sudo systemctl restart nginx
 
 
-13. 서비스 실행
+12. 서비스 실행
 - nginx 정지
 $ sudo service ngnix stop
 
