@@ -14,63 +14,20 @@
 
 
 ### 참고 사이트
-|참고 내용                |참조 사이트                                                                                            |
-|:-----------------------:|:-----------------------------------------------------------------------------------------------------:|
-|페이지네이션             |https://wikidocs.net/81054                                                                             |
-|라디오 버튼              |https://stackoverflow.com/questions/15839169/how-to-get-value-of-selected-radio-button                 |
-|플라스크와html간 변수전달|https://velog.io/@dltpal07/flask%EC%99%80-html-%EA%B0%84%EC%9D%98-%EB%B3%80%EC%88%98-%EC%A0%84%EB%8B%AC|
-| 점수 아이콘 css         |https://www.codingnepalweb.com/star-rating-html-css-javascript/                                        |
-| button href 사용 예시   |https://www.codestudyblog.com/sf2002e/0224200636.html                                                  |
-| 패스워드 정규식         |https://www.ocpsoft.org/tutorials/regular-expressions/password-regular-expression/                     |
-| MySQL 트리거            |https://stackoverflow.com/questions/9190758/mysql-default-date-14-days-for-a-column                    |
-| SQLAlchemy Join문 예시  |https://stackoverflow.com/questions/27900018/flask-sqlalchemy-query-join-relational-tables             |
+|참고 내용                |참조 사이트                                                                                                        |
+|:-----------------------:|:-----------------------------------------------------------------------------------------------------------------:|
+|페이지네이션             |https://wikidocs.net/81054                                                                                         |
+|라디오 버튼              |https://stackoverflow.com/questions/15839169/how-to-get-value-of-selected-radio-button                             |
+|플라스크와html간 변수전달|https://velog.io/@dltpal07/flask%EC%99%80-html-%EA%B0%84%EC%9D%98-%EB%B3%80%EC%88%98-%EC%A0%84%EB%8B%AC            |
+| 점수 아이콘 css         |https://www.codingnepalweb.com/star-rating-html-css-javascript/                                                    |
+| button href 사용 예시   |https://www.codestudyblog.com/sf2002e/0224200636.html                                                              |
+| 패스워드 정규식         |https://www.ocpsoft.org/tutorials/regular-expressions/password-regular-expression/                                 |
+| MySQL 트리거            |https://stackoverflow.com/questions/9190758/mysql-default-date-14-days-for-a-column                                |
+| SQLAlchemy Join문 예시  |https://stackoverflow.com/questions/27900018/flask-sqlalchemy-query-join-relational-tables                         |
+| nginx sock error        |https://stackoverflow.com/questions/32974204/got-no-such-file-or-directory-error-while-configuring-nginx-and-uwsgi |
 
+- nginx error log 확인: vim \var\log\nginx\error.log
 
-
-## 프로젝트 환경 설정
-```bash
-1. OS : WSL2
-- 세팅 방법 : https://www.44bits.io/ko/post/wsl2-install-and-basic-usage
-
-2. 가상환경 설정
-
-# venv
-$ python -m venv .myenv
-
-# venv start
-$ source .myenv/bin/activate
-
-# pip package 설치(.venv 진입상태)
-$ pip install -r requirements.txt
-
-
-3. 데이터베이스 설치 및 설정
-- DB 버전 : 10.3.31-MariaDB-0ubuntu0.20.04.1
-- Mariadb 진입 : sudo mysql -uroot -pmysql
-- password 기입 : enter => password : pw => enter
-- 데이터 베이스 생성 : create database <데이터베이스명>;
-
-4. .env 파일 생성
-DB_CONNECT=mysql+pymysql://<ID>:<PW>@127.0.0.1:3306/<데이터베이스명>
-PW='<PW>'
-
-5. flask db Migrate(.venv 진입상태)
-& flask db init
-& flask db migrate
-& flask db upgrade
-
-6. 트리거만 추가.(.venv 진입상태)
-- 대여 시 자동으로 현재날짜와 반납일자를 데이터베이스에 넣어줍니다.
-$ mysql -u<ID> -p<PW> <데이터베이스명> < sql/rent_trigger.sql
-
-7. 테스트 데이터 넣어주기
-$ insert/csv_insert.py 실행
-$ insert/inventory_insert.py 실행
-
-8. Flask run 설정
-$ export FLASK_APP=app.py
-$ flask run
-
-```
-
-
+## 문서
+- [프로젝트환경구성](docs/Preferences.md)
+- [서버배포](docs/Server_Deploy.md)
