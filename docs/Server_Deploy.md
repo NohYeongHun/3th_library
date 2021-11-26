@@ -1,11 +1,14 @@
 ### 서버 배포(nginx + uwsgi + flask)
 ```
-1. 파이썬 개발환경 구축
+1. git clone
+$ git clone https://kdt-gitlab.elice.io/003-part2-project-library/team3/test.git
+
+2. 파이썬 개발환경 구축
 $ sudo apt update  
 $ sudo apt install python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools
 $ sudo apt install python3-venv
 
-2. 데이터 베이스 설치 및 설정
+3. 데이터 베이스 설치 및 설정
 $ sudo apt-get install mysql-server
 $ sudo systemctl enable mysql
 
@@ -18,37 +21,32 @@ $ flush privileges;
 
 $ create database <데이터베이스명>
 
-3. 가상환경 진입
+4. 가상환경 진입(git clone 폴더에서)
 $ python3 -m venv .myenv
 
 - venv start
 $ source .myenv/bin/activate
 
-4. pip package 설치(.venv 진입상태)
+5. pip package 설치(.venv 진입상태)
 $ pip install -r requirements.txt
 $ pip3 install flask flask-sqlalchemy pymysql Flask-Bcrypt uwsgi
 
-5. .env 파일 설정
-5-1 .env 파일 생성후 코드편집기로 해당 양식에 맞춰서 작성
+6. .env 파일 설정
+6-1 .env 파일 생성후 코드편집기로 해당 양식에 맞춰서 작성
 DB_CONNECT=mysql+pymysql://<ID>:<PW>@127.0.0.1:3306/<데이터베이스명>
 PW=<PW>
 
-5-2 scp로 .env 파일 전송
+6-2 scp로 .env 파일 전송
 - netstat -tnl 명령어를 통해 접근 가능한 포트의 설정여부 확인
 - 열려있는 포트를 확인하고 해당 포트로 scp 명령어를 통한 파일전송
 
 $ scp -p<열려있는 포트번호> <파일경로> <ID>@<도메인주소>:<저장할 디렉토리경로>
 $ scp -p 3306 ./elice_backend/.env <ID>@<도메인주소>:test/elice_backend
 
-6. flask db Migrate(.venv 진입상태)
+7. flask db Migrate(.venv 진입상태)
 & flask db init
 & flask db migrate
 & flask db upgrade
-
-
-7. 트리거만 추가.(.venv 진입상태)
-- 대여 시 자동으로 현재날짜와 반납일자를 데이터베이스에 넣어줍니다.
-$ mysql -u<ID> -p<PW> <데이터베이스명> < sql/rent_trigger.sql
 
 8. wsgi.py 생성 및 연결확인
         ==python==
