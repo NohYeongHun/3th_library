@@ -40,14 +40,17 @@ class rabbitRent(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('inventory.id'), nullable=False)
     book_info_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
     user_id = db.Column(db.String(20), db.ForeignKey('user.id'), nullable=False)
+
+    from datetime import datetime  
+    from datetime import timedelta  
     # 빌린 날짜
-    rent_date = db.Column(db.Date, nullable=False)
+    rent_date = db.Column(db.Date, nullable=False, default = datetime.now())
     # 마감 예정일
-    due_date = db.Column(db.Date, nullable=False)
+    due_date = db.Column(db.Date, nullable=False, default= datetime.now() + timedelta(days=14))
     # 실제 반납일
     return_date = db.Column(db.DateTime, nullable=True)
     # 반납 여부
-    book_return = db.Column(db.Boolean, nullable=False, default= False)
+    book_return = db.Column(db.Boolean, nullable=False, default= False, server_default= db.text('False'))
 
 
 class rabbitComment(db.Model):
