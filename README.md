@@ -14,18 +14,19 @@
 
 
 ### 참고 사이트
-|참고 내용                |참조 사이트                                                                                            |
-|:-----------------------:|:-----------------------------------------------------------------------------------------------------:|
-|페이지네이션             |https://wikidocs.net/81054                                                                             |
-|라디오 버튼              |https://stackoverflow.com/questions/15839169/how-to-get-value-of-selected-radio-button                 |
-|플라스크와html간 변수전달|https://velog.io/@dltpal07/flask%EC%99%80-html-%EA%B0%84%EC%9D%98-%EB%B3%80%EC%88%98-%EC%A0%84%EB%8B%AC|
-| 점수 아이콘 css         |https://www.codingnepalweb.com/star-rating-html-css-javascript/                                        |
-| button href 사용 예시   |https://www.codestudyblog.com/sf2002e/0224200636.html                                                  |
-| 패스워드 정규식         |https://www.ocpsoft.org/tutorials/regular-expressions/password-regular-expression/                     |
-| MySQL 트리거            |https://stackoverflow.com/questions/9190758/mysql-default-date-14-days-for-a-column                    |
-| SQLAlchemy Join문 예시  |https://stackoverflow.com/questions/27900018/flask-sqlalchemy-query-join-relational-tables             |
+|참고 내용                |참조 사이트                                                                                                        |
+|:-----------------------:|:-----------------------------------------------------------------------------------------------------------------:|
+|페이지네이션             |https://wikidocs.net/81054                                                                                         |
+|라디오 버튼              |https://stackoverflow.com/questions/15839169/how-to-get-value-of-selected-radio-button                             |
+|플라스크와html간 변수전달|https://velog.io/@dltpal07/flask%EC%99%80-html-%EA%B0%84%EC%9D%98-%EB%B3%80%EC%88%98-%EC%A0%84%EB%8B%AC            |
+| 점수 아이콘 css         |https://www.codingnepalweb.com/star-rating-html-css-javascript/                                                    |
+| button href 사용 예시   |https://www.codestudyblog.com/sf2002e/0224200636.html                                                              |
+| 패스워드 정규식         |https://www.ocpsoft.org/tutorials/regular-expressions/password-regular-expression/                                 |
+| MySQL 트리거            |https://stackoverflow.com/questions/9190758/mysql-default-date-14-days-for-a-column                                |
+| SQLAlchemy Join문 예시  |https://stackoverflow.com/questions/27900018/flask-sqlalchemy-query-join-relational-tables                         |
+| nginx sock error        |https://stackoverflow.com/questions/32974204/got-no-such-file-or-directory-error-while-configuring-nginx-and-uwsgi |
 
-
+- nginx error log 확인: vim \var\log\nginx\error.log
 
 ## 프로젝트 환경 설정
 ```bash
@@ -136,7 +137,7 @@ if __name__ =="__main__":
 - 연결 확인
 uwsgi -–socket 0.0.0.0:5000 --protocol=http –w wsgi:app
 
-9. 명령어 설정 
+9. ini 파일 설정. 
 vim test.ini
 [uwsgi]
 module = wsgi:app
