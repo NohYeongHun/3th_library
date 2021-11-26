@@ -1,12 +1,12 @@
+/* container */
+.container{
+  max-width:1200px;
+}
+
 /* card-image*/
 .card-img-top {
-    height:15vw;
     object-fit: contain;
 } 
-
-.card-img-contain {
-    object-fit: fill;
-}
 
 /* card-set*/
 .card-inventory{
@@ -29,8 +29,16 @@
 }
 
 .card-title{
-    height: 3vw;
-    object-fit: fill;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:100%;
+    font-size:1.15em;
+    font-weight: 600;
+    height: 30px;
+}
+.card-link{
+color: var(--default-typo-black);
 }
 
 /* table index*/
@@ -58,6 +66,7 @@
 
 /* a tag */
 a{
+    color:black;
     text-decoration: none;
 }
 
@@ -115,3 +124,8 @@ a{
   
   
 
+.text-muted{
+  overflow : hidden ; 
+  white-space : nowrap ; 
+  text-overflow : ellipsis;
+}
