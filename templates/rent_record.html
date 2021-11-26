@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}대여 정보 페이지{% endblock %}
+
+{% block page_content %}
+
+{% if page_list %}
+<div class="container">
+    <div class="row row-cols-1 rowcols-xs-1 row-cols-sm2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3 mb-4">
+        {% for rent in page_list.items%}
+        <div class="col" >
+            <div class="card book-card shadow-sm h-100">
+                <div class="card book-card h-100">
+                    <img src="/static/img/{{rent.id}}.jpg" class="card-img-top" width="100%" height="320"/> 
+                </div>
+                <div class="card-body">
+                    <h5 class= card-title>
+                        <a class="card-link" href="{{url_for('comment.home', id=rent.id)}}">
+                            {{rent.book_name}}
+                        </a>
+                    </h5>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col col-7" style="padding-left: 1em;">
+                        <!-- star rating bar -->
+                        {% for x in range(rating_list[rent.id]) %}
+                            <span class="fa fa-star checked"></span>
+                        {% endfor %}
+                        {% for x in range(5-rating_list[rent.id]) %}
+                            <label class="fa fa-star unchecked"></label>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col me-auto">
+                    <p>대여일자 : {{ rent.rent_date }} ~ {{ rent.due_date }}</p>
+                    {% if rent.return_date %}
+                    <p>반납일자 : {{ rent.return_date}}</p>
+                    {% else %}
+                    <p> 대여중 </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<p> 대여하신 책 목록이 없습니다..</p>
+
+{% endif %}
+
+
+
+<ul class="pagination justify-content-center">
+
+    {% if page_list.has_prev %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ page_list.prev_num }}">이전</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+    </li>
+    {% endif %}
+    {% for page_num in page_list.iter_pages() %}
+        {% if page_num %}
+            {% if page_num != page_list.page %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+            </li>
+            {% else %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">{{ page_num }}</a>
+            </li>
+            {% endif %}
+       {% else %}
+            <li class="disabled">
+                <a class="page-link" href="#">...</a>
+            </li>
+       {% endif %}
+    {% endfor %}
+
+    {% if page_list.has_next %}
+    <li class="page-item">
+        <a class="page-link" href="?page={{ page_list.next_num }}">다음</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+    </li>
+    {% endif %}
+</ul>
+
+{% endblock %}
+                            
